@@ -1,5 +1,6 @@
 from django.contrib import admin
-from shop.models import Category, Product, Order, OrderItem
+
+from shop.models import Category, Order, OrderItem, Product
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -65,5 +66,3 @@ class OrderItemAdmin(admin.ModelAdmin):
 
 
 admin.site.register(OrderItem, OrderItemAdmin)
-
-

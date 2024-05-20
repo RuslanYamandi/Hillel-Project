@@ -1,4 +1,5 @@
-from django.forms import ModelForm, NumberInput, TextInput, Select, Textarea
+from django.forms import ModelForm, NumberInput, Select, Textarea, TextInput
+
 from shop.models import Product
 
 

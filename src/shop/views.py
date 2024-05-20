@@ -1,8 +1,8 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import CreateView, ListView
 
 from shop.forms import ProductForm
-from shop.models import Product, Category
+from shop.models import Category, Product
 
 
 class ListProductsView(ListView):

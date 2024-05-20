@@ -1,5 +1,7 @@
 from django.urls import path
-from main.views import index, user_login, user_logout, UserRegistrationView, UserActivationView
+
+from main.views import (UserActivationView, UserRegistrationView, index,
+                        user_login, user_logout)
 
 app_name = 'main'
 
