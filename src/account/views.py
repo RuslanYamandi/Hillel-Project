@@ -4,29 +4,29 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, RedirectView
 
-from main.forms import UserRegistrationForm
-from main.services.emails import send_registration_email
-from main.utils.token_generator import TokenGenerator
+from account.forms import UserRegistrationForm
+from account.services.emails import send_registration_email
+from account.utils.token_generator import TokenGenerator
 
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, "index.html")
 
 
 def user_login(request):
-    if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
+    if request.method == "POST":
+        email = request.POST["email"]
+        password = request.POST["password"]
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('main:index')
-    return render(request, 'registration/login.html')
+            return redirect("main:index")
+    return render(request, "registration/login.html")
 
 
 def user_logout(request):
     logout(request)
-    return redirect(reverse_lazy('main:index'))
+    return redirect(reverse_lazy("main:index"))
 
 
 class UserRegistrationView(CreateView):

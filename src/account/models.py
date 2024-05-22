@@ -4,7 +4,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from main.managers import CustomUserManager
+from account.managers import CustomUserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -20,8 +20,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         _("active"),
         default=True,
         help_text=_(
-            "Designates whether this user should be treated as active. "
-            "Unselect this instead of deleting accounts."
+            "Designates whether this user should be treated as active. " "Unselect this instead of deleting accounts."
         ),
     )
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)

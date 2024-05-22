@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from main.models import User
+from account.models import User
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -15,13 +15,13 @@ class UserAdmin(admin.ModelAdmin):
         ("Additional information", {"fields": ("is_active", "is_staff", "is_superuser")}),
     )
 
-    actions = ['make_active', 'make_inactive']
+    actions = ["make_active", "make_inactive"]
 
-    @admin.action(description='Activate selected Users')
+    @admin.action(description="Activate selected Users")
     def make_active(self, request, queryset):
         queryset.update(is_active=True)
 
-    @admin.action(description='Deactivate selected Users')
+    @admin.action(description="Deactivate selected Users")
     def make_inactive(self, request, queryset):
         queryset.update(is_active=False)
 

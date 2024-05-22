@@ -1,9 +1,9 @@
 from django.urls import path
 
-from main.views import (UserActivationView, UserRegistrationView, index,
-                        user_login, user_logout)
+from account.views import (UserActivationView, UserRegistrationView, index,
+                           user_login, user_logout)
 
-app_name = 'main'
+app_name = "main"
 
 
 urlpatterns = [

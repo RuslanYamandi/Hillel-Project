@@ -8,7 +8,7 @@ class UserRegistrationForm(UserCreationForm):
         model = get_user_model()
         fields = ["email", "first_name", "last_name"]
         widgets = {
-            'email': EmailInput(attrs={'class': 'form-control'}),
-            'first_name': TextInput(attrs={'class': 'form-control'}),
-            'last_name': TextInput(attrs={'class': 'form-control'}),
+            "email": EmailInput(attrs={"class": "form-control"}),
+            "first_name": TextInput(attrs={"class": "form-control"}),
+            "last_name": TextInput(attrs={"class": "form-control"}),
         }
