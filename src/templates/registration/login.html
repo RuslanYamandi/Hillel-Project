@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div style="width: 25em; margin: auto">
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label class="text-primary text-dark font-weight-bold">Email:</label>
+          <input type="email" class="form-control" name="email">
+        </div>
+        <br>
+        <div class="form-group">
+          <label class="text-primary text-dark font-weight-bold">Password:</label>
+          <input type="password" class="form-control" name="password">
+        </div>
+        <br>
+        <input type="submit" class="btn btn-primary" value="Login">
+        <a class="btn-link link-primary" href="{% url 'main:register' %}">Register</a>
+    </form>
+</div>
+
+{% endblock %}

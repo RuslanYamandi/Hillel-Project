@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="btn-group-vertical" role="group">
+            {% for category in categories %}
+                <a href="{% url 'shop:get_products' %}" class="btn btn-light">{{ category.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="row">
+            {% for product in products %}
+            <div class="col-md-3">
+                <div class="card">
+                    <img class="img-fluid rounded-start" src="{{ product.image.url }}" alt="Photo" width="300">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ product.name }}</h4>
+                        <p class="card-text">{{ product.category.name }}</p>
+                        <div class="card-text">{{ product.price }} &euro;</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
