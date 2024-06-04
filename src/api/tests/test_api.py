@@ -1,7 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
-from rest_framework.status import (HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CONTENT)
+from rest_framework.status import (HTTP_200_OK, HTTP_201_CREATED,
+                                   HTTP_204_NO_CONTENT)
 from rest_framework.test import APIClient
 
 from shop.models import Category, Product
@@ -72,4 +73,3 @@ class TestApi(TestCase):
 
         result = self.client.delete(reverse("api:products_delete", kwargs={"pk": self.product.pk}))
         self.assertEqual(result.status_code, HTTP_204_NO_CONTENT)
-
