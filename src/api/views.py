@@ -3,11 +3,13 @@ from rest_framework.generics import (CreateAPIView, DestroyAPIView,
                                      UpdateAPIView)
 from rest_framework.viewsets import ModelViewSet
 
+from api.permissions import IsSuperUser
 from api.serializers import CategorySerializer, ProductSerializer
 from shop.models import Category, Product
 
 
 class CategoryViewSet(ModelViewSet):
+    permission_classes = [IsSuperUser]
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
