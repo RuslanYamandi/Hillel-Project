@@ -29,18 +29,20 @@ class TestApi(TestCase):
     def test_product_details(self):
         self.client.force_authenticate(user=self.user)
 
-        result = self.client.get(
+        response = self.client.get(
             reverse("api:products_details", kwargs={"pk": self.product.pk}),
         )
-        self.assertEqual(result.status_code, HTTP_200_OK)
+        self.assertEqual(response.status_code, HTTP_200_OK)
+        self.assertEqual(response.data['name'], self.product.name)
 
     def test_product_list(self):
         self.client.force_authenticate(user=self.user)
 
-        result = self.client.get(
+        response = self.client.get(
             reverse("api:products_list"),
         )
-        self.assertEqual(result.status_code, HTTP_200_OK)
+        self.assertEqual(response.status_code, HTTP_200_OK)
+        self.assertEqual(response.data[0]['name'], self.product.name)
 
     def test_product_create(self):
         self.client.force_authenticate(user=self.user)
@@ -53,8 +55,9 @@ class TestApi(TestCase):
             'active': True,
         }
 
-        result = self.client.post(reverse("api:products_create"), data=payload, format='json')
-        self.assertEqual(result.status_code, HTTP_201_CREATED)
+        response = self.client.post(reverse("api:products_create"), data=payload, format='json')
+        self.assertEqual(response.status_code, HTTP_201_CREATED)
+        self.assertEqual(response.data['name'], payload['name'])
 
     def test_product_update(self):
         self.client.force_authenticate(user=self.user)
@@ -63,13 +66,19 @@ class TestApi(TestCase):
             'price': 15,
         }
 
-        result = self.client.patch(
+        response = self.client.patch(
             reverse("api:products_update", kwargs={"pk": self.product.pk}), data=payload, format='json'
         )
-        self.assertEqual(result.status_code, HTTP_200_OK)
+        self.assertEqual(response.status_code, HTTP_200_OK)
+        self.assertEqual(float(response.data['price']), payload['price'])
 
     def test_product_delete(self):
         self.client.force_authenticate(user=self.user)
 
-        result = self.client.delete(reverse("api:products_delete", kwargs={"pk": self.product.pk}))
-        self.assertEqual(result.status_code, HTTP_204_NO_CONTENT)
+        response = self.client.delete(reverse("api:products_delete", kwargs={"pk": self.product.pk}))
+        self.assertEqual(response.status_code, HTTP_204_NO_CONTENT)
+
+        response = self.client.get(
+            reverse("api:products_details", kwargs={"pk": self.product.pk}),
+        )
+        self.assertTrue("name" not in response.data)
