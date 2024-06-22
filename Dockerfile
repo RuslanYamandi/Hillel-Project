@@ -6,8 +6,12 @@ RUN mkdir /shop
 WORKDIR /shop
 
 COPY ./src ./src
+COPY ./run_server_dev.sh ./run_server_dev.sh
 COPY ./requirements.txt ./requirements.txt
 
-RUN python -m pip install --upgrade pip & pip install -r ./requirements.txt
+RUN python3 -m pip install --upgrade pip & pip install -r ./requirements.txt
+RUN ["chmod", "+x", "./run_server_dev.sh"]
 
-CMD ["python", "src/manage.py", "runserver", "0:8000"]
+CMD ["bash"]
+
+# sudo docker run --rm --name django_container -it -p 8050:8000 -v ./src:/shop/src shop
