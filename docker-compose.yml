@@ -1,0 +1,27 @@
+
+services:
+  backend:
+    build: ./
+    container_name: shop
+    working_dir: /shop
+    ports:
+      - "8050:8000"
+    command:
+      - ./run_server_dev.sh
+    volumes:
+      - ./src:/shop/src
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:15.7
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+volumes:
+  pg_data: { }
